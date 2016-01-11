@@ -31,6 +31,10 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
+    public function oAuth() {
+        return $this->hasMany('\App\Models\OAuth');
+    }
+
     public function locations() {
         return $this->hasMany('\App\Models\Location');
     }
