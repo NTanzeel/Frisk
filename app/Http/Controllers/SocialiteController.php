@@ -67,7 +67,7 @@ class SocialiteController extends Controller {
             $dbUser = $oauth->user;
         }
 
-//        $this->auth->login($dbUser, true);
+        $this->auth->login($dbUser, true);
 
         return redirect('/home');
     }
