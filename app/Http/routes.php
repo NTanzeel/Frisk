@@ -22,16 +22,24 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-
-});
-
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-
+    /*
+     * Root
+     */
     Route::get('/', function() {
         return view('welcome');
     });
 
     Route::get('/home', 'HomeController@index');
+
+    /*
+     * Authentication
+     */
+    Route::auth();
+
+    /*
+     * Socialite Authentication
+     */
+    Route::get('auth/{provider}/redirect', 'SocialiteController@redirect');
+    Route::get('auth/{provider}/callback', 'SocialiteController@callback');
 });
