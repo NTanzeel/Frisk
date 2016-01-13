@@ -27,6 +27,10 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
+        if (property_exists($this, 'loginView')) {
+            return view($this->loginView);
+        }
+
         if (view()->exists('auth.authenticate')) {
             return view('auth.authenticate');
         }
@@ -96,7 +100,7 @@ trait AuthenticatesUsers
         }
 
         if (method_exists($this, 'authenticated')) {
-            return $this->authenticated($request, Auth::user());
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
         }
 
         return redirect()->intended($this->redirectPath());
@@ -145,7 +149,7 @@ trait AuthenticatesUsers
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSignout()
+    public function getLogout()
     {
         return $this->logout();
     }
@@ -155,7 +159,7 @@ trait AuthenticatesUsers
      *
      * @return \Illuminate\Http\Response
      */
-    public function signout()
+    public function logout()
     {
         Auth::guard($this->getGuard())->logout();
 

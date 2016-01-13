@@ -95,11 +95,12 @@ if (! function_exists('auth')) {
     /**
      * Get the available auth instance.
      *
+     * @param  string|null  $guard
      * @return \Illuminate\Contracts\Auth\Factory
      */
-    function auth()
+    function auth($guard = null)
     {
-        return app(AuthFactory::class);
+        return app(AuthFactory::class)->guard($guard);
     }
 }
 
@@ -224,7 +225,7 @@ if (! function_exists('csrf_token')) {
      *
      * @return string
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     function csrf_token()
     {
