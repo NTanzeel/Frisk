@@ -46,12 +46,26 @@ Route::group(['middleware' => 'web'], function () {
     /*
      * Dashboard
      */
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')
+        ->name('dashboard');
 
     /*
      * Locations
      */
-    Route::get('/dashboard/locations', 'LocationsController@index');
-    Route::get('/dashboard/locations/create', 'LocationsController@create');
-    Route::post('/dashboard/locations/create', 'LocationsController@store');
+    Route::group(['as' => 'location::'], function() {
+        Route::get('dashboard/locations', [
+            'as'    => 'index',
+            'uses'  => 'LocationsController@index'
+        ]);
+
+        Route::get('dashboard/locations/create', [
+            'as'    => 'create',
+            'uses'  => 'LocationsController@create'
+        ]);
+
+        Route::post('dashboard/locations/create', [
+            'as'    => 'store',
+            'uses'  => 'LocationsController@store'
+        ]);
+    });
 });
