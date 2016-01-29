@@ -40,6 +40,18 @@ Route::group(['middleware' => 'web'], function () {
     /*
      * Socialite Authentication
      */
-    Route::get('auth/{provider}/redirect', 'SocialiteController@redirect');
-    Route::get('auth/{provider}/callback', 'SocialiteController@callback');
+    Route::get('/auth/{provider}/redirect', 'SocialiteController@redirect');
+    Route::get('/auth/{provider}/callback', 'SocialiteController@callback');
+
+    /*
+     * Dashboard
+     */
+    Route::get('/dashboard', 'DashboardController@index');
+
+    /*
+     * Locations
+     */
+    Route::get('/dashboard/locations', 'LocationsController@index');
+    Route::get('/dashboard/locations/create', 'LocationsController@create');
+    Route::post('/dashboard/locations/create', 'LocationsController@store');
 });

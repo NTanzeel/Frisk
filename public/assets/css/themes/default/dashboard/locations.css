@@ -1,0 +1,13 @@
+.panel.stored-location, .panel.stored-location > .panel-heading {
+    background: #FFFFFF;
+}
+
+.stored-location .panel-body {
+    padding: 0;
+    height: 150px;
+    overflow: hidden;
+}
+
+.stored-location .map {
+    height: 175px;
+}

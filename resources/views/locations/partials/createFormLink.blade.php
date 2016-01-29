@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createLocationModal">{{ $text }}</button>

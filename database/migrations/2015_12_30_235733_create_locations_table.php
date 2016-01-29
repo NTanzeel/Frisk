@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
             $table->double('latitude');
             $table->double('longitude');
             $table->integer('door_no')->unsigned();
-            $table->string('firs_address_list');
+            $table->string('first_address_line');
             $table->string('second_address_line');
             $table->string('city', 50);
             $table->string('region', 50);
@@ -27,7 +27,7 @@ class CreateLocationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

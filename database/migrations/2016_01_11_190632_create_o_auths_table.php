@@ -21,7 +21,7 @@ class CreateOAuthsTable extends Migration
             $table->softDeletes();
 
             $table->index(['auth_id', 'provider']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
         });
     }
 

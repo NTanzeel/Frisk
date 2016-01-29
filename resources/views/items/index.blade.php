@@ -1,21 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.dashboard.index')
+
+@section('title', 'My Items')
 
 @section('content')
-    <div class="container spark-screen">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Items</div>
+    <h3 class="page-header">My Items</h3>
+    @if(count($items))
+        @foreach($items as $item)
 
-                    <div class="panel-body">
-                        @if(count($items))
-                            @foreach($items as $item)
-
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endforeach
+    @endif
 @endsection
