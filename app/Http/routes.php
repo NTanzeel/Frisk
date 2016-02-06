@@ -46,24 +46,49 @@ Route::group(['middleware' => 'web'], function () {
     /*
      * Dashboard
      */
-    Route::get('/dashboard', 'DashboardController@index')
-        ->name('dashboard');
+    Route::group(['as' => 'dashboard::'], function() {
+        Route::get('/dashboard', [
+            'as'    => 'index',
+            'uses'  => 'DashboardController@index'
+        ]);
+    });
+
+    /*
+     * Items
+     */
+
+    Route::group(['as' => 'items::'], function() {
+        Route::get('/dashboard/items', [
+            'as'    => 'index',
+            'uses'  => 'ItemsController@index'
+        ]);
+
+        Route::get('/dashboard/items/create', [
+            'as'    => 'create',
+            'uses'  => 'ItemsController@create'
+        ]);
+
+        Route::post('/dashboard/items/create', [
+            'as'    => 'store',
+            'uses'  => 'ItemsController@store'
+        ]);
+    });
 
     /*
      * Locations
      */
-    Route::group(['as' => 'location::'], function() {
-        Route::get('dashboard/locations', [
+    Route::group(['as' => 'locations::'], function() {
+        Route::get('/dashboard/locations', [
             'as'    => 'index',
             'uses'  => 'LocationsController@index'
         ]);
 
-        Route::get('dashboard/locations/create', [
+        Route::get('/dashboard/locations/create', [
             'as'    => 'create',
             'uses'  => 'LocationsController@create'
         ]);
 
-        Route::post('dashboard/locations/create', [
+        Route::post('/dashboard/locations/create', [
             'as'    => 'store',
             'uses'  => 'LocationsController@store'
         ]);

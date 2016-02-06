@@ -10,7 +10,7 @@ class Location extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'longitude', 'latitude', 'door_no', 'first_address_line', 'second_address_line', 'city', 'region', 'postcode'
+        'longitude', 'latitude', 'first_address_line', 'second_address_line', 'city', 'region', 'postcode'
     ];
 
     protected $attributes = [

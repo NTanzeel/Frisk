@@ -16,7 +16,7 @@
         @forelse($locations as $key => $location)
             <div class="col-sm-6 col-md-4">
                 <div class="panel panel-default stored-location">
-                    <div class="panel-heading">{!! $location->door_no . ', ' . $location->first_address_line . ', ' . $location->postcode !!}</div>
+                    <div class="panel-heading">{!! $location->first_address_line . ', ' . $location->postcode !!}</div>
                     <div class="panel-body">
                         <div class="map" data-latitude="{!! $location->latitude !!}" data-longitude="{!! $location->longitude !!}">
 
@@ -45,7 +45,7 @@
                 onSubmit : function(address) {
                     var maps = $('<div class="col-sm-6 col-md-4">' +
                             '<div class="panel panel-default stored-location">' +
-                            '<div class="panel-heading">' + address.door_no + ', ' + address.first_address_line + ', ' + address.postcode + '</div>' +
+                            '<div class="panel-heading">' + address.first_address_line + ', ' + address.postcode + '</div>' +
                             '<div class="panel-body">' +
                             '<div class="map" data-latitude="' + address.latitude + '" data-longitude="' + address.longitude + '">' +
                             '</div>' +

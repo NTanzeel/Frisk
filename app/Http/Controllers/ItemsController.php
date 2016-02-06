@@ -23,7 +23,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Auth::user()->items();
+        $items = Auth::user()->items;
 
         return view('items.index', compact('items'));
     }
@@ -35,18 +35,24 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        //
+        $locations = [null => 'Please Select'];
+        foreach(Auth::user()->locations as $location) {
+            $locations[$location->id] = $location->first_address_line . ', ' . $location->postcode;
+        }
+        return view('items.create', compact('locations'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Requests\CreateItemRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateItemRequest $request)
     {
-        //
+        Auth::user()->items()->save(new Item(array_merge(['location_id' => $request->get('location')], $request->all())));
+
+        return redirect(route('items::index'));
     }
 
     /**

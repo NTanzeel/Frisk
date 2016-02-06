@@ -10,7 +10,7 @@ class Item extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'identifier', 'description'
+        'location_id', 'name', 'identifier', 'description'
     ];
 
     protected $dates = [

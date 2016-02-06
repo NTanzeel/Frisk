@@ -17,7 +17,6 @@ class CreateLocationsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->double('latitude');
             $table->double('longitude');
-            $table->integer('door_no')->unsigned();
             $table->string('first_address_line');
             $table->string('second_address_line');
             $table->string('city', 50);
