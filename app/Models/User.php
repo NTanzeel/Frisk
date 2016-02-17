@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property mixed id
+ * @property mixed email
+ */
 class User extends Authenticatable
 {
     use SoftDeletes;
@@ -30,6 +34,10 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at'
     ];
+
+    public function storagePath() {
+        return md5($this->id . $this->email);
+    }
 
     public function oAuth() {
         return $this->hasMany('\App\Models\OAuth');

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resource;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
-class ItemsController extends Controller
-{
+class ItemsController extends Controller {
     public function __construct() {
         $this->middleware('auth');
     }
@@ -21,9 +20,10 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $items = Auth::user()->items;
+    public function index() {
+        $items = Auth::user()->items()->with(['location', 'resources' => function($query) {
+            return $query->where('type', 'coverImage')->get();
+        }])->get();
 
         return view('items.index', compact('items'));
     }
@@ -33,10 +33,9 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         $locations = [null => 'Please Select'];
-        foreach(Auth::user()->locations as $location) {
+        foreach (Auth::user()->locations as $location) {
             $locations[$location->id] = $location->first_address_line . ', ' . $location->postcode;
         }
         return view('items.create', compact('locations'));
@@ -48,9 +47,30 @@ class ItemsController extends Controller
      * @param Requests\CreateItemRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\CreateItemRequest $request)
-    {
-        Auth::user()->items()->save(new Item(array_merge(['location_id' => $request->get('location')], $request->all())));
+    public function store(Requests\CreateItemRequest $request) {
+
+        $item = new Item([
+            'location_id' => $request->get('location'),
+            'name' => $request->get('name'),
+            'identifier' => $request->get('identifier'),
+            'description' => $request->get('description'),
+        ]);
+
+        Auth::user()->items()->save($item);
+
+        $coverImage = $request->file('coverImage');
+
+        if ($coverImage && $coverImage->isValid()) {
+            $fileName = $coverImage->getFilename() . '.' . $coverImage->getClientOriginalExtension();
+            $storagePath = 'uploads/' . Auth::user()->storagePath() . '/' . $item->storagePath();
+            $coverImage->move($storagePath, $fileName);
+
+            $item->resources()->save(new Resource([
+                'name' => $fileName,
+                'path' => $storagePath,
+                'type' => 'image'
+            ]));
+        }
 
         return redirect(route('items::index'));
     }
@@ -58,45 +78,41 @@ class ItemsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

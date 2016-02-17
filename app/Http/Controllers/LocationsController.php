@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,7 +41,7 @@ class LocationsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $location = new \App\Models\Location($request->all());
+        $location = new Location($request->all());
 
         \Auth::user()->locations()->save($location);
 
@@ -54,7 +55,9 @@ class LocationsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $location = Location::find($id);
+
+        return $location->items()->count();
     }
 
     /**
@@ -85,6 +88,13 @@ class LocationsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        $location = Location::find($id);
+
+        $deleted = true;//$location->items()->count() == 0 && $location->delete();
+
+        return \Response::json([
+            'success' => $deleted,
+            'message' => $deleted ? 'The location has been deleted.' : 'Unable to delete location as one or more items are currently using it.'
+        ], $deleted ? 200 : 400);
     }
 }

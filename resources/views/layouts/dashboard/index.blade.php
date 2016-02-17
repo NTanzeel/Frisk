@@ -6,13 +6,49 @@
 @stop
 
 @section('container')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                @include('layouts.dashboard.partials.sidebar')
-            </div>
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 page-container">
-                @yield('content')
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            @include('layouts.dashboard.partials.sidebar')
+        </div>
+        <div class="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">
+                            <button type="button" class="navbar-toggle sidebar-toggle" data-toggle="collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="heading-text">
+                                @yield('page-title')
+                            </div>
+                            @yield('page-actions')
+                        </h3>
+                    </div>
+                </div>
+                <div class="row" style="height: 0;">
+                    <div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
+                        <div id="notification-slider" class="alert alert-danger" role="alert"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        @eval($url = '/')
+                        <ol class="breadcrumb">
+                            <li><a href="{{ url($url) }}">Frisk</a></li>
+                            @foreach(Request::segments() as $segment)
+                                <li><a href="{{ url($url .= $segment . '/') }}">{{ ucwords($segment) }}</a></li>
+                            @endforeach
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -20,5 +56,6 @@
 
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ URL::asset('assets/js/dashboard/common.js') }}"></script>
     <script async defer type="text/javascript" src="{{ URL::asset('assets/js/dashboard/navigation.js') }}"></script>
 @stop

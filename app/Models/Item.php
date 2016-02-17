@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property mixed name
+ * @property mixed id
+ */
 class Item extends Model
 {
     use SoftDeletes;
@@ -17,11 +21,21 @@ class Item extends Model
         'deleted_at'
     ];
 
+    public function storagePath() {
+        return md5($this->id . $this->name);
+    }
+
     public function owner() {
         return $this->belongsTo('\App\Models\User');
     }
 
     public function location() {
-        return $this->hasOne('\App\Models\Location');
+        return $this->belongsTo('\App\Models\Location');
     }
+
+    public function resources() {
+        return $this->hasMany('\App\Models\Resource');
+    }
+
+
 }

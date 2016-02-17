@@ -102,8 +102,9 @@
 
         function saveLocation(that) {
             $.post(form.attr('action'), form.serialize(), function(data) {
-                that.options.onSubmit($.parseJSON(data));
+                form.trigger('reset');
                 $('#createLocationModal').modal('hide');
+                that.options.onSubmit($.parseJSON(data));
             });
         }
     };

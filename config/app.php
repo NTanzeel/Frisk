@@ -155,6 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
 
         /*
          * Custom Service Providers...
@@ -162,6 +163,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
     ],
 
     /*

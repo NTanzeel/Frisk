@@ -23,14 +23,13 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
-    /*
-     * Root
-     */
-    Route::get('/', function() {
-        return view('welcome');
-    });
 
-    Route::get('/home', 'HomeController@index');
+    Route::group(['as' => 'pages::'], function() {
+        Route::get('/', [
+            'as'    => 'index',
+            'uses'  => 'HomeController@index'
+        ]);
+    });
 
     /*
      * Authentication
@@ -40,8 +39,18 @@ Route::group(['middleware' => 'web'], function () {
     /*
      * Socialite Authentication
      */
-    Route::get('/auth/{provider}/redirect', 'SocialiteController@redirect');
-    Route::get('/auth/{provider}/callback', 'SocialiteController@callback');
+
+    Route::group(['as' => 'socialite::'], function() {
+        Route::get('/auth/{provider}/redirect', [
+            'as'    => 'redirect',
+            'uses'  =>'SocialiteController@redirect'
+        ]);
+
+        Route::get('/auth/{provider}/callback', [
+            'as'    => 'redirect',
+            'uses'  =>'SocialiteController@callback'
+        ]);
+    });
 
     /*
      * Dashboard
@@ -50,6 +59,31 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/dashboard', [
             'as'    => 'index',
             'uses'  => 'DashboardController@index'
+        ]);
+    });
+
+    /*
+     * Locations
+     */
+    Route::group(['as' => 'locations::'], function() {
+        Route::get('/dashboard/locations', [
+            'as'    => 'index',
+            'uses'  => 'LocationsController@index'
+        ]);
+
+        Route::get('/dashboard/locations/create', [
+            'as'    => 'create',
+            'uses'  => 'LocationsController@create'
+        ]);
+
+        Route::post('/dashboard/locations/create', [
+            'as'    => 'store',
+            'uses'  => 'LocationsController@store'
+        ]);
+
+        Route::delete('dashboard/locations/{id}', [
+            'as'    => 'delete',
+            'uses'  => 'LocationsController@destroy'
         ]);
     });
 
@@ -72,25 +106,10 @@ Route::group(['middleware' => 'web'], function () {
             'as'    => 'store',
             'uses'  => 'ItemsController@store'
         ]);
-    });
 
-    /*
-     * Locations
-     */
-    Route::group(['as' => 'locations::'], function() {
-        Route::get('/dashboard/locations', [
-            'as'    => 'index',
-            'uses'  => 'LocationsController@index'
-        ]);
-
-        Route::get('/dashboard/locations/create', [
-            'as'    => 'create',
-            'uses'  => 'LocationsController@create'
-        ]);
-
-        Route::post('/dashboard/locations/create', [
-            'as'    => 'store',
-            'uses'  => 'LocationsController@store'
+        Route::delete('dashboard/items/{id}', [
+            'as'    => 'delete',
+            'uses'  => 'ItemsController@destroy'
         ]);
     });
 });

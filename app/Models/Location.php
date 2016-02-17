@@ -24,4 +24,8 @@ class Location extends Model
     public function user() {
         return $this->belongsTo('\App\Models\User');
     }
+
+    public function items() {
+        return $this->hasMany('\App\Models\Item');
+    }
 }

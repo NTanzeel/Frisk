@@ -30,9 +30,7 @@
     </head>
 
     <body id="page-top app-layout">
-        @section('header')
-            @include('layouts.default.partials.header')
-        @show
+        @yield('header')
 
         @section('container')
             <div class="container-fluid">
@@ -44,12 +42,17 @@
 
         @show
 
+        @yield('pre-scripts')
+
         @section('scripts')
             <!-- jQuery -->
             <script src="{{ URL::asset('assets/js/jquery.js') }}"></script>
 
             <!-- Bootstrap Core JavaScript -->
             <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+
+            <!-- Frisk Core JavaScript -->
+            <script src="{{ URL::asset('assets/js/frisk.js') }}"></script>
         @show
     </body>
 
