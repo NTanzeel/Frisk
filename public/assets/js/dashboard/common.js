@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.delete').on('click', function(event) {
+    $('body').on('click', '.delete', function(event) {
         event.stopPropagation();
         var that = this;
         $.ajax({

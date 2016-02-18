@@ -10,7 +10,7 @@
         <div id="sidebar-wrapper">
             @include('layouts.dashboard.partials.sidebar')
         </div>
-        <div class="page-content-wrapper">
+        <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
@@ -28,22 +28,26 @@
                         </h3>
                     </div>
                 </div>
-                <div class="row" style="height: 0;">
-                    <div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">
-                        <div id="notification-slider" class="alert alert-danger" role="alert"></div>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-md-12">
                         @eval($url = '/')
                         <ol class="breadcrumb">
                             <li><a href="{{ url($url) }}">Frisk</a></li>
                             @foreach(Request::segments() as $segment)
+                                @if (is_numeric($segment))
+                                    @eval(break)
+                                @endif
                                 <li><a href="{{ url($url .= $segment . '/') }}">{{ ucwords($segment) }}</a></li>
                             @endforeach
+                            @yield('breadcrumb')
                         </ol>
                     </div>
                 </div>
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">--}}
+                        {{--<div id="notification-slider" class="alert alert-danger" role="alert"></div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="row">
                     <div class="col-sm-12">
                         @yield('content')

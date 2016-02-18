@@ -102,9 +102,19 @@ Route::group(['middleware' => 'web'], function () {
             'uses'  => 'ItemsController@create'
         ]);
 
-        Route::post('/dashboard/items/create', [
+        Route::post('/dashboard/items', [
             'as'    => 'store',
             'uses'  => 'ItemsController@store'
+        ]);
+
+        Route::get('dashboard/items/{id}/edit', [
+            'as'    => 'edit',
+            'uses'  => 'ItemsController@edit'
+        ]);
+
+        Route::put('dashboard/items/{id}', [
+            'as'    => 'save',
+            'uses'  => 'ItemsController@update'
         ]);
 
         Route::delete('dashboard/items/{id}', [

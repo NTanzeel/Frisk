@@ -1,42 +1,5 @@
-.items {
-
-}
-
-.items .item {
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 20px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .5);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.items .item > .item-image {
+#saved-items .item > .content-body > .item-image {
     height: 200px;
     background-size: cover;
     background-position: center;
-}
-
-.items .item > .item-name {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 8px;
-    color: #FFFFFF;
-    position: absolute;
-    background: rgba(52, 68, 79, 0.5);
-}
-
-.items .item > .delete {
-    right: 0;
-    z-index: 1;
-    position: absolute;
-}
-
-.items .item > .delete i.fa {
-    display: block;
-}
-
-.items .item .delete:hover {
-    color: #E74C3C;
 }

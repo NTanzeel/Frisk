@@ -14,6 +14,7 @@
             <link href="{{ URL::asset('assets/css/bootstrap/3.3.6.min.css') }}" rel="stylesheet">
 
             <!-- Custom CSS -->
+            <link href="{{ URL::asset('assets/css/global/helpers.css') }}" rel="stylesheet">
             <link href="{{ URL::asset('assets/css/themes/default/global.css') }}" rel="stylesheet">
         @show
 

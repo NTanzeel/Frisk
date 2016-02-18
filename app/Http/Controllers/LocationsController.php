@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Locations\CreateLocationRequest;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class LocationsController extends Controller {
 
@@ -37,10 +37,10 @@ class LocationsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param CreateLocationRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CreateLocationRequest $request) {
         $location = new Location($request->all());
 
         \Auth::user()->locations()->save($location);
@@ -90,7 +90,7 @@ class LocationsController extends Controller {
     public function destroy($id) {
         $location = Location::find($id);
 
-        $deleted = true;//$location->items()->count() == 0 && $location->delete();
+        $deleted = $location->items()->count() == 0 && $location->delete();
 
         return \Response::json([
             'success' => $deleted,

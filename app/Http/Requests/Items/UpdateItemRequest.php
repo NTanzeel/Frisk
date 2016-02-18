@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Items;
 
 use App\Http\Requests\Request;
 
-class CreateItemRequest extends Request
-{
+class UpdateItemRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,12 +20,11 @@ class CreateItemRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'name' => 'required|string|min:6|max:20',
-            'identifier' => 'required|string|min:6',
-            'location' => 'required|numeric'
+            'name'          => 'required|string|min:6|max:20',
+            'identifier'    => 'required|string|min:6',
+            'location'      => 'required|numeric'
         ];
     }
 }

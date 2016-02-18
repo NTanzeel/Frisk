@@ -20,7 +20,7 @@
         <li>
             <a href="{{ route('locations::index') }}">
                 <span class="glyphicon glyphicon-map-marker nav-icon"></span>
-                <span class="nav-label">Location</span>
+                <span class="nav-label">Locations</span>
             </a>
         </li>
         <li>

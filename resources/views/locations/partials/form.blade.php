@@ -9,20 +9,20 @@
                 {!! csrf_field() !!}
                 <div id="addressLookup">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label class="sr-only" for="search_postcode">Find Address Using Postcode</label>
+                        <div class="form-group margin-bottom-0">
+                            <label for="search_postcode">Postcode</label>
                             <div class="input-group">
+                                <input type="text" class="form-control" id="search_postcode" placeholder="E14 5AB" maxlength="8">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Postcode <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Postcode</a></li>
-                                        <li><a href="#">Current Location</a></li>
+                                    <button type="submit" class="btn btn-default">Find</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a id="use_current_location" href="#">Current Location</a></li>
                                     </ul>
                                 </div>
-                                <input type="text" class="form-control" id="search_postcode" placeholder="E14 5AB" maxlength="8">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default">Find</button>
-                                </span>
                             </div>
                         </div>
                     </div>

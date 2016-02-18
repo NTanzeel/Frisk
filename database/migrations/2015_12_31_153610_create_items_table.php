@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration {
             $table->integer('location_id')->unsigned();
             $table->string('name', 20);
             $table->string('identifier');
+            $table->double('value');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();
