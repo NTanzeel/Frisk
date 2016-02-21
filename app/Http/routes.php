@@ -27,26 +27,88 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['as' => 'pages::'], function() {
         Route::get('/', [
             'as'    => 'index',
-            'uses'  => 'HomeController@index'
+            'uses'  => 'PagesController@index'
+        ]);
+
+        Route::get('search/{query}', [
+            'as'    => 'search',
+            'uses'  => 'PagesController@search'
+        ]);
+
+        Route::get('list/near/{latitude}/{longitude}', [
+            'as'    => 'near',
+            'uses'  => 'PagesController@near'
         ]);
     });
 
     /*
      * Authentication
      */
-    Route::auth();
+    Route::group(['as' => 'auth::'], function() {
+        /*
+         * Login Routes
+         */
+        Route::get('login', [
+            'as'    => 'login',
+            'uses'  => 'Auth\AuthController@showLoginForm'
+        ]);
+
+        Route::post('login', [
+            'as'    => 'attempt',
+            'uses'  => 'Auth\AuthController@login'
+        ]);
+
+        /*
+         * Logout Routes
+         */
+        Route::get('logout', [
+            'as'    => 'signout',
+            'uses'  => 'Auth\AuthController@signout'
+        ]);
+
+        /*
+         * Registration Routes
+         */
+        Route::get('register', [
+            'as'    => 'register',
+            'uses'  => 'Auth\AuthController@showRegistrationForm'
+        ]);
+
+        Route::post('register', [
+            'as'    => 'store',
+            'uses'  => 'Auth\AuthController@register'
+        ]);
+
+        /*
+         * Password Reset Routes
+         */
+        Route::get('password/reset/{token?}', [
+            'as'    => 'reset',
+            'uses'  => 'Auth\PasswordController@showResetForm'
+        ]);
+
+        Route::post('password/email', [
+            'as'    => 'email',
+            'uses'  => 'Auth\PasswordController@sendResetLinkEmail'
+        ]);
+
+        Route::post('password/reset', [
+            'as'    => 'update',
+            'uses'  => 'Auth\PasswordController@reset'
+        ]);
+    });
 
     /*
      * Socialite Authentication
      */
 
     Route::group(['as' => 'socialite::'], function() {
-        Route::get('/auth/{provider}/redirect', [
+        Route::get('auth/{provider}/redirect', [
             'as'    => 'redirect',
             'uses'  =>'SocialiteController@redirect'
         ]);
 
-        Route::get('/auth/{provider}/callback', [
+        Route::get('auth/{provider}/callback', [
             'as'    => 'redirect',
             'uses'  =>'SocialiteController@callback'
         ]);
@@ -56,7 +118,7 @@ Route::group(['middleware' => 'web'], function () {
      * Dashboard
      */
     Route::group(['as' => 'dashboard::'], function() {
-        Route::get('/dashboard', [
+        Route::get('dashboard', [
             'as'    => 'index',
             'uses'  => 'DashboardController@index'
         ]);
@@ -66,17 +128,17 @@ Route::group(['middleware' => 'web'], function () {
      * Locations
      */
     Route::group(['as' => 'locations::'], function() {
-        Route::get('/dashboard/locations', [
+        Route::get('dashboard/locations', [
             'as'    => 'index',
             'uses'  => 'LocationsController@index'
         ]);
 
-        Route::get('/dashboard/locations/create', [
+        Route::get('dashboard/locations/create', [
             'as'    => 'create',
             'uses'  => 'LocationsController@create'
         ]);
 
-        Route::post('/dashboard/locations/create', [
+        Route::post('dashboard/locations/create', [
             'as'    => 'store',
             'uses'  => 'LocationsController@store'
         ]);
@@ -92,17 +154,17 @@ Route::group(['middleware' => 'web'], function () {
      */
 
     Route::group(['as' => 'items::'], function() {
-        Route::get('/dashboard/items', [
+        Route::get('dashboard/items', [
             'as'    => 'index',
             'uses'  => 'ItemsController@index'
         ]);
 
-        Route::get('/dashboard/items/create', [
+        Route::get('dashboard/items/create', [
             'as'    => 'create',
             'uses'  => 'ItemsController@create'
         ]);
 
-        Route::post('/dashboard/items', [
+        Route::post('dashboard/items', [
             'as'    => 'store',
             'uses'  => 'ItemsController@store'
         ]);

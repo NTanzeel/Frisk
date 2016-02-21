@@ -148,9 +148,9 @@ trait AuthenticatesUsers
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLogout()
+    public function getSignout()
     {
-        return $this->logout();
+        return $this->signout();
     }
 
     /**
@@ -158,7 +158,7 @@ trait AuthenticatesUsers
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function signout()
     {
         Auth::guard($this->getGuard())->logout();
 

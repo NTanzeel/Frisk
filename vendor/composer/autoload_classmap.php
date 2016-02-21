@@ -11,6 +11,7 @@ return array(
     'CreateOAuthsTable' => $baseDir . '/database/migrations/2016_01_11_190632_create_o_auths_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateResourcesTable' => $baseDir . '/database/migrations/2016_02_11_234702_create_resources_table.php',
+    'CreateStolenItemsTable' => $baseDir . '/database/migrations/2016_02_18_184420_create_stolen_items_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',

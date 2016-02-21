@@ -26,7 +26,7 @@ class CreateLocationRequest extends Request {
             'second_address_line'   => 'string|min:6',
             'city'                  => 'required|string|min:3|max:50',
             'region'                => 'required|string|min:3|max:50',
-            'postcode'              => 'required|string|min:7|max:8'
+            'postcode'              => 'required|string|min:6|max:8'
         ];
     }
 }
