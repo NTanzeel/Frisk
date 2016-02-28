@@ -18,3 +18,8 @@
         </div>
     </div>
 @stop
+
+@section('scripts')
+    @parent
+    <script src="{{ URL::asset('assets/js/page/common.js') }}"></script>
+@stop

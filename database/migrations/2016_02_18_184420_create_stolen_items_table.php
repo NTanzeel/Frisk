@@ -11,7 +11,7 @@ class CreateStolenItemsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('StolenItems', function (Blueprint $table) {
+        Schema::create('Stolen_Items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('item_id')->unsigned();
             $table->integer('location_id')->unsigned();

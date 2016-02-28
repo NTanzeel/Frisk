@@ -24,7 +24,8 @@ class UpdateItemRequest extends Request {
         return [
             'name'          => 'required|string|min:6|max:20',
             'identifier'    => 'required|string|min:6',
-            'location'      => 'required|numeric'
+            'location'      => 'required|numeric',
+            'value'         => 'required|numeric'
         ];
     }
 }

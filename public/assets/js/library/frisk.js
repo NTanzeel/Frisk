@@ -4,7 +4,6 @@ var Frisk = Frisk || (function(){
     return {
         init : function(Args) {
             _args = Args;
-            // some other initialising
         },
 
         store : function(key, value) {
@@ -12,7 +11,7 @@ var Frisk = Frisk || (function(){
         },
 
         get : function(key) {
-            return _args[key];
+            return _args[key] ? _args[key] : false;
         }
     };
 }());

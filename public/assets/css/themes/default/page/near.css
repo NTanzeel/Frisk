@@ -1,0 +1,109 @@
+.wrapper {
+    top: 60px;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+
+.grid-section {
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .grid-section {
+        left: 0;
+        width: 60%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .map-view {
+        left: 60%;
+        width: 40%;
+        height: 100%;
+        position: absolute;
+    }
+}
+
+.grid-section .search-actions {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 20px;
+    position: absolute;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.grid-section .search-results {
+    bottom: 0;
+    top : 74px;
+    width: 100%;
+    padding-top: 20px;
+    position: absolute;
+    overflow-y: scroll;
+}
+
+.grid-section .search-result {
+    position: relative;
+}
+
+.grid-section .search-result > .result-body {
+    position: relative;;
+}
+
+.grid-section .search-result > .result-body > .carousel {
+    background: #FFFFFF;
+}
+
+.grid-section .search-result > .result-body > .carousel .carousel-control {
+    color: #EEE;
+    background: none;
+}
+
+.grid-section .search-result > .result-body > .distance {
+    left: 0;
+    top: 30px;
+    color: #FFFFFF;
+    font-size: 24px;
+    padding: 7px 10px;
+    position: absolute;
+    background-color: #3c3f40;
+    background-color: rgba(60, 63, 64, 0.9);
+}
+
+.grid-section .search-result > .result-body > .distance > .unit {
+    font-size: 16px;
+}
+
+.grid-section .search-result > .result-footer {
+    padding: 10px;
+    position: relative;
+}
+
+.grid-section .search-result > .result-footer a.name {
+    font-size: 16px;
+    display: block;
+}
+
+.grid-section .search-result > .result-footer a.serial {
+    color: #AAA;
+    display: block;
+}
+
+.grid-section .search-result > .result-footer > .user-initials {
+    top: -24px;
+    right: 10px;
+    width: 60px;
+    padding: 16px 0;
+    font-weight: bold;
+    text-align: center;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 2px solid #FFF;
+    background: #F5F5F5;
+    position: absolute;
+}

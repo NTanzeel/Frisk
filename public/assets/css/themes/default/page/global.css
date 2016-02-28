@@ -2,6 +2,21 @@ body {
     padding-top: 61px;
 }
 
+a {
+    color: #565a5c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #E74C3C;
+    text-decoration: none;
+}
+
+
+.navbar {
+    margin-bottom: 0;
+}
+
 .navbar-default {
     background-color: #FFF;
 }
@@ -29,15 +44,45 @@ body {
     margin-right: 5px;
 }
 
+.navbar-default .navbar-nav > li a {
+    color: #A7A7A7;
+    font-weight: 300;
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li.dropdown.open > a {
+.navbar-default .navbar-nav > li.dropdown.open > a,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
     color: #E74C3C;
     background-color: #F5F5F5;
 }
 
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:focus,
-.navbar-default .navbar-nav > .open > a:hover {
-    background-color: #F5F5F5;
+@media(min-width: 768px) {
+    .dropdown-menu > li > a {
+        width: 200px;
+        padding: 8px 20px;
+    }
+}
+
+.navbar .search-form {
+    margin: 0;
+    padding-left: 0;
+}
+
+.navbar .search-form input[type=text] {
+    border: 0;
+    outline: 0;
+    height: auto;
+    width: 357px;
+    border-left: 1px solid #E7E7E7;
+    padding: 20px 0 20px 48px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAOVBMVEUAAADN0MzBwcHMzsrN0MvLy8vM0Muurq7M0MzLzsvMz8zNz8vN0MzN0MvMz8vM0MzMz8rNz8vN0MxKa1gpAAAAEnRSTlMA8QxHqhjqBJUhZ7XR5cSAUYexMXffAAABIUlEQVR4XsWV0bKDIAxEEaQkKKj8%2F8feEu%2BUToPFfeq%2BFXqyG4VomoKjnEpJmVwwY3kqbyI%2FAMJWPrR9dfFrUVq%2FmPAkRSdybC07%2Bv%2FJl%2FUn2Y%2BvECGeKxceQfIs9n3NLpKq34f0S5%2BrJJ13A0l9vS4evVBU01oN2EmMlUI1iD3rWHd0F64adJsL1cLpRMp4sJVbmZ55VkB6AtwH%2BAkkBdTObB%2BwdQ8G4Ehw0%2FBjhV8cfDTQwwcfb%2FACzdvOyBUVkb03BJoS3xszTQ8eDLKm9VgbMRiV8zlmwqyJ%2FjCuFQ5jFHE57ndxUMS1WHIhBKGETSjBj18QHiVmgxIOIbJ8YgBil6sJEFFu5l0i77HNlzHxkjcYsZt78jPyf5E7Foo1zx89RiefHSpQDgAAAABJRU5ErkJggg%3D%3D) 12px 50% no-repeat;
+    background-size: 24px 24px;
 }

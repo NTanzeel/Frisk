@@ -17,7 +17,7 @@
 
     <div class="form-group">
         {!! Form::label('value', 'Value') !!}
-        {!! Form::text('value', isset($model) ? $model->location_id : null, ['placeholder' => '19.99', 'class' => 'form-control']) !!}
+        {!! Form::text('value', isset($model) ? $model->value : null, ['placeholder' => '19.99', 'class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">

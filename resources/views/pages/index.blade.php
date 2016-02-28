@@ -2,44 +2,49 @@
 
 @section('title', 'Home')
 
-@section('content')
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-                <div class="panel-body">
-                    <label for="search_query">Search:</label>
-                    <input type="text" id="search_query" name="search" />
+@section('style')
+    @parent
+    <link href="{{ URL::asset('assets/css/themes/default/page/index.css') }}" rel="stylesheet">
+@stop
+
+@section('container')
+    <section class="header-section">
+        <div id="crimes_near_by" class="map" data-latitude="52.38167946424569" data-longitude="-1.5618637662616455">
+
+        </div>
+        <div id="search_container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <form id="search_form" class="search-form" action="{{ route('search::query') }}" method="get">
+                            <label for="search_query" class="sr-only">Search</label>
+                            <div class="input-group">
+                                <input type="text" id="search_query" name="query" class="form-control" placeholder="Enter a name or serial number" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="submit">Search!</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <p>
-                    <button id="near_me" type="button" class="btn btn-default">Near Me!</button>
-                </p>
             </div>
         </div>
-    </div>
+    </section>
+@stop
+
+@section('pre-scripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASGCfgteFuvjCkXtXq9lTWgtCRW0qrcsw"></script>
 @stop
 
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ URL::asset('assets/js/library/maps.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var route = '{{ route('pages::near', [':latitude', ':longitude']) }}';
-            $('#near_me').on('click', function() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        var location = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        window.location.href = route.replace(':latitude', location.lat).replace(':longitude', location.lng);
-                    }, function() {
-                        alert('We can\'t access your location :(');
-                    });
-                } else {
-
-                }
-            })
-        });
+            Maps.init({
+                map_marker: '{{ URL::asset('assets/img/icons/map_marker.png') }}'
+            });
+        })
     </script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/page/index.js') }}"></script>
 @stop

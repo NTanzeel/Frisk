@@ -4,17 +4,17 @@
 
 @section('content')
     <div class="row">
-        @if(count($items) > 0)
+        @if(count($results) > 0)
             <div class="col-md-6">
                 <div class="row">
-                    @foreach($items as $item)
+                    @foreach($results as $result)
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    {{ $item->name }} - {{ $item->distance }}KM
+                                    {{ $result->item->name }}{{ isset($result->distance) ? (' - ' . ($result->distance ? $result->distance : 'Less Than 1') . 'KM') : '' }}
                                 </div>
                                 <div class="panel-body">
-                                    <img src="{{ URL::asset($item->resources[0]->path . '/' . $item->resources[0]->name) }}" width="100%" />
+                                    <img src="{{ URL::asset($result->item->resources[0]->path . '/' . $result->item->resources[0]->name) }}" width="100%" />
                                 </div>
                             </div>
                         </div>

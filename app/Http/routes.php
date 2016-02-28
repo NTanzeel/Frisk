@@ -29,15 +29,17 @@ Route::group(['middleware' => 'web'], function () {
             'as'    => 'index',
             'uses'  => 'PagesController@index'
         ]);
+    });
 
-        Route::get('search/{query}', [
-            'as'    => 'search',
-            'uses'  => 'PagesController@search'
+    Route::group(['as' => 'search::'], function() {
+        Route::get('search/', [
+            'as'    => 'query',
+            'uses'  => 'SearchController@search'
         ]);
 
         Route::get('list/near/{latitude}/{longitude}', [
             'as'    => 'near',
-            'uses'  => 'PagesController@near'
+            'uses'  => 'SearchController@near'
         ]);
     });
 
@@ -62,7 +64,7 @@ Route::group(['middleware' => 'web'], function () {
          * Logout Routes
          */
         Route::get('logout', [
-            'as'    => 'signout',
+            'as'    => 'logout',
             'uses'  => 'Auth\AuthController@signout'
         ]);
 
@@ -177,6 +179,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::put('dashboard/items/{id}', [
             'as'    => 'save',
             'uses'  => 'ItemsController@update'
+        ]);
+
+        Route::post('dashboard/items/{id}/toggle', [
+            'as'    => 'toggle',
+            'uses'  => 'ItemsController@toggleStolen'
         ]);
 
         Route::delete('dashboard/items/{id}', [

@@ -53,7 +53,7 @@
             <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 
             <!-- Frisk Core JavaScript -->
-            <script src="{{ URL::asset('assets/js/frisk.js') }}"></script>
+            <script src="{{ URL::asset('assets/js/library/frisk.js') }}"></script>
         @show
     </body>
 

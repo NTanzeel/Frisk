@@ -25,6 +25,7 @@ class CreateItemRequest extends Request {
             'name'          => 'required|string|min:6|max:20',
             'identifier'    => 'required|string|min:6',
             'location'      => 'required|numeric',
+            'value'         => 'required|numeric',
             'coverImage'    => 'required|image'
         ];
     }

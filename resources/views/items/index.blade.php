@@ -20,34 +20,23 @@
 @stop
 
 @section('content')
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-target="#all-Items" data-toggle="tab">All</a></li>
+        <li><a data-target="#private-items" data-toggle="tab">Private</a></li>
+        <li><a data-target="#stolen-items" data-toggle="tab">Reported</a></li>
+    </ul>
     <div class="page-content">
-        @if(count($items))
-            <div id="saved-items" class="row">
-                @foreach($items as $item)
-                    <div class="col-md-4">
-                        <div id="item-{{ $item->id }}" class="content-box item">
-                            <ul class="list-inline action-list top-right">
-                                <li>
-                                    <a class="edit" href="{{ route('items::edit', [$item->id]) }}">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="delete" data-for="#item-{{ $item->id }}" data-target="{{ route('items::delete', [$item->id]) }}" data-token="{{ csrf_token() }}">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="content-body">
-                                <div class="item-image" style="background-image: url('{{ URL::asset($item->resources[0]->path . '/' . $item->resources[0]->name) }}')"></div>
-                            </div>
-                            <div class="content-label item-name">
-                                {{ $item->name }}
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+        <div class="tab-content">
+            <div class="tab-pane active" id="all-Items">
+                @include('items.partials.listing', ['items' => $items, 'prefix' => 'item-'])
+                {!! $items->render() !!}
             </div>
-        @endif
+            <div class="tab-pane" id="private-items">
+                @include('items.partials.listing', ['items' => $private, 'prefix' => 'private-item-'])
+            </div>
+            <div class="tab-pane" id="stolen-items">
+                @include('items.partials.listing', ['items' => $stolen, 'prefix' => 'stolen-item-'])
+            </div>
+        </div>
     </div>
 @endsection

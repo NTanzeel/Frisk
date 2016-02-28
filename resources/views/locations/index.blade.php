@@ -52,12 +52,17 @@
 
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ URL::asset('assets/js/library/maps.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             Frisk.init({
                 deleteToken: '{{ csrf_token() }}',
                 deletePath : '{{ route('locations::delete', ['id']) }}'
             });
+
+            Maps.init({
+                map_marker : '{{ URL::asset('assets/img/icons/map_marker.png') }}'
+            })
         })
     </script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/dashboard/AddressLookup.js') }}"></script>

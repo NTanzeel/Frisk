@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed name
  * @property mixed id
+ * @property mixed user_id
  */
 class Item extends Model
 {
@@ -25,7 +26,7 @@ class Item extends Model
         return md5($this->id . $this->name);
     }
 
-    public function owner() {
+    public function user() {
         return $this->belongsTo('\App\Models\User');
     }
 
@@ -37,5 +38,7 @@ class Item extends Model
         return $this->hasMany('\App\Models\Resource');
     }
 
-
+    public function stolenRecord() {
+        return $this->hasOne('\App\Models\StolenItem');
+    }
 }

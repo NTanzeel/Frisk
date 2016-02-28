@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $('.location .map').each(function(key, element) {
-        addMap(element);
+        Maps.addMarker(Maps.create($(element).attr('id'), element), {lat : $(element).data('latitude'), lng : $(element).data('longitude')});
     });
 
     $('#newLocationForm').AddressLookup({
@@ -16,32 +16,10 @@ $(document).ready(function() {
                 ':label' : address.first_address_line + ', ' + address.postcode
             });
 
-            var map = $(html).appendTo('#saved-locations').find('.map').get(0);
-            addMap(map);
+            var element = $(html).appendTo('#saved-locations').find('.map').get(0);
+            Maps.addMarker(Maps.create('saved-location-' + address.id, element), {lat : address.latitude, lng : address.longitude});
         }
     });
-
-    function addMap(element) {
-        var map = new google.maps.Map(element, {
-            center: {lat: $(element).data('latitude'), lng: $(element).data('longitude')},
-            zoom: 14,
-            disableDefaultUI: true,
-            draggable: false,
-            scrollwheel: false,
-            disableDoubleClickZoom: true,
-            styles: [{
-                featureType: "all",
-                elementType: "labels",
-                stylers: [{visibility: "off"}]
-            }]
-        });
-
-        var marker = new google.maps.Marker({
-            position: {lat: $(element).data('latitude'), lng: $(element).data('longitude')},
-            map: map,
-            icon: 'https://cdn2.iconfinder.com/data/icons/bitsies/128/Location-24.png'
-        });
-    }
 
     function fillHTML(html, replacements) {
         $.each(replacements, function(key, value) {

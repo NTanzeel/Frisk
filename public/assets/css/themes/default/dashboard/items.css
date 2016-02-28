@@ -1,4 +1,4 @@
-#saved-items .item > .content-body > .item-image {
+.item > .content-body > .item-image {
     height: 200px;
     background-size: cover;
     background-position: center;

@@ -1,0 +1,46 @@
+.header-section {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.header-section #crimes_near_by.map {
+    height: 325px;
+}
+
+@media (min-width: 768px) {
+    .header-section {
+        height: 600px;
+        overflow: hidden;
+    }
+
+    .header-section #crimes_near_by.map {
+        height: 625px;
+    }
+}
+
+#search_container {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#search_container #search_form {
+    padding: 30px 0;
+}
+
+#search_container #search_form #search_query {
+    height: 44px;
+    font-size: 16px;
+    padding: 8px 10px;
+    border-radius: 2px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+#search_container #search_form button[type=submit] {
+    height: 44px;
+    padding: 10px 20px;
+}
