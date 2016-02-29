@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var notification = $('#notification-slider');
+
     $('body').on('click', '.delete', function(event) {
         event.stopPropagation();
         var that = this;
@@ -22,12 +24,17 @@ $(document).ready(function() {
     });
 
     function showNotification(type, message) {
-        $('#notification-slider').removeClass(function (index, css) {
-            return css != 'alert-dismissible' && (css.match (/(^|\s)alert-\S+/g) || []).join(' ');
-        }).addClass('alert-' + type).text(message).animate({top : '-20px'}, 200);
+        if (notification) {
+            notification.find('.alert').text(message).removeClass(function (index, css) {
+                return css != 'alert-dismissible' && (css.match (/(^|\s)alert-\S+/g) || []).join(' ');
+            }).addClass('alert-' + type);
 
-        setTimeout(function() {
-            $('#notification-slider').text('').animate({top : '-52px'}, 200);
-        }, 3000)
+            notification.animate({top : '0'}, 200, function() {
+                setTimeout(function() {
+                    notification.animate({top : '-52px'}, 200);
+                }, 3000);
+            });
+        }
+
     }
 });

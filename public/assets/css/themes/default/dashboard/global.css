@@ -162,7 +162,6 @@ a:hover {
 .page-header {
     margin: 0;
     padding: 0;
-    z-index: 1000;
     color: #34444F;
     position: relative;
     background: #FFFFFF;
@@ -226,15 +225,19 @@ a:hover {
 
 #notification-slider {
     z-index: 2;
-    top: -52px;
+    top: -45px;
     left: 15px;
     right: 15px;
-    border-top: none;
-    text-align: center;
     position: absolute;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 }
+
+#notification-slider .alert {
+    margin: 0;
+    border-radius: 0;
+    padding: 12px 20px;
+    border-width: 0 0 1px;
+}
+
 
 .page-content {
     padding-top: 20px;

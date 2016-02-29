@@ -12,6 +12,11 @@
         </div>
         <div id="page-content-wrapper">
             <div class="container-fluid">
+                <div id="notification-slider" class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" role="alert"></div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <h3 class="page-header">
@@ -43,11 +48,6 @@
                         </ol>
                     </div>
                 </div>
-                {{--<div class="row">--}}
-                    {{--<div class="col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0">--}}
-                        {{--<div id="notification-slider" class="alert alert-danger" role="alert"></div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
                 <div class="row">
                     <div class="col-sm-12">
                         @yield('content')
