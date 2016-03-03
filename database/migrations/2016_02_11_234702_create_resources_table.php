@@ -13,9 +13,10 @@ class CreateResourcesTable extends Migration {
         Schema::create('Resources', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('item_id')->unsigned();
+            $table->string('alias', 50);
             $table->string('name');
             $table->string('path');
-            $table->string('type', 10);
+            $table->tinyInteger('type')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 

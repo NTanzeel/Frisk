@@ -17,7 +17,10 @@ $(document).ready(function() {
             });
 
             var element = $(html).appendTo('#saved-locations').find('.map').get(0);
-            Maps.addMarker(Maps.create('saved-location-' + address.id, element), {lat : address.latitude, lng : address.longitude});
+            Maps.addMarker(Maps.create('saved-location-' + address.id, element), {
+                lat : parseFloat(address.latitude),
+                lng : parseFloat(address.longitude)
+            });
         }
     });
 

@@ -190,5 +190,37 @@ Route::group(['middleware' => 'web'], function () {
             'as'    => 'delete',
             'uses'  => 'ItemsController@destroy'
         ]);
+
+        Route::get('dashboard/items/{id}/delete', [
+            'as'    => 'remove',
+            'uses'  => 'ItemsController@destroy'
+        ]);
+    });
+
+    Route::group(['as' => 'resources::', 'middleware' => 'ajax'], function() {
+        Route::get('dashboard/resources/create', [
+            'as'    => 'create',
+            'uses'  => 'ResourcesController@create'
+        ]);
+
+        Route::post('dashboard/resources', [
+            'as'    => 'store',
+            'uses'  => 'ResourcesController@store'
+        ]);
+
+        Route::get('dashboard/resources/{id}/edit', [
+            'as'    => 'edit',
+            'uses'  => 'ResourcesController@edit'
+        ]);
+
+        Route::put('dashboard/resources/{id}', [
+            'as'    => 'save',
+            'uses'  => 'ResourcesController@update'
+        ]);
+
+        Route::delete('dashboard/resources/{id}', [
+            'as'    => 'delete',
+            'uses'  => 'ResourcesController@destroy'
+        ]);
     });
 });

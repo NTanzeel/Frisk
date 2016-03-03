@@ -251,14 +251,20 @@ a:hover {
 
 .nav-tabs > li > a,
 .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover {
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li > .dropdown > a {
     margin: 0;
     cursor: pointer;
     border-radius: 0;
     padding: 10px 15px 6px;
     border-width: 0 0 4px 0;
     border-bottom-style: solid;
-    border-bottom-color: transparent;;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs > li > .dropdown > a {
+    display: block;
+    text-decoration: none;
 }
 
 .nav-tabs > li > a:hover {
@@ -268,7 +274,9 @@ a:hover {
 }
 
 .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover {
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li > .dropdown.open > a,
+.nav-tabs > li > .dropdown.open > a:hover {
     color: #E74C3C;
     border-bottom-color: #E74C3C;
 }
@@ -326,4 +334,34 @@ a:hover {
     width: 18px;
     display: block;
     text-align: center;
+}
+
+.panel-collapsible {
+    border: none;
+    box-shadow: none;
+}
+
+.panel-collapsible .panel-heading {
+    padding: 0;
+    background: none;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #EEE;
+}
+
+.panel-collapsible .panel-heading > .panel-title > a {
+    display: block;
+    padding: 10px 0;
+}
+
+.panel-collapsible .panel-heading > .panel-title > a:hover {
+    color: inherit;
+}
+
+.panel-collapsible > .panel-heading+.panel-collapse > .panel-body {
+    padding: 0;
+    border-top: none;
+}
+
+.panel-group .panel+.panel {
+    margin-top: 0;
 }

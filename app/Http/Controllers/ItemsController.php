@@ -26,21 +26,14 @@ class ItemsController extends Controller {
      */
     public function index() {
         $items = Auth::user()->items()->with(['location', 'stolenRecord', 'resources' => function($builder) {
-            $builder->where('type', 'public');
-        }])->paginate(15);
+            $builder->where('type', Resource::$PUBLIC);
+        }])->get();
 
-        $private = [];
-        $stolen = [];
+        $items = collect(['all' => $items, 'private' => [], 'reported' => []])->merge($items->groupBy(function($item) {
+            return $item->stolenRecord ? 'reported' : 'private';
+        }));
 
-        foreach ($items as $item) {
-            if ($item->stolenRecord) {
-                $stolen[] = $item;
-            } else {
-                $private[] = $item;
-            }
-        }
-
-        return view('items.index', compact('items', 'private', 'stolen'));
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -74,17 +67,18 @@ class ItemsController extends Controller {
 
         Auth::user()->items()->save($item);
 
-        $coverImage = $request->file('public');
+        $coverImage = $request->file('coverImage');
 
         if ($coverImage && $coverImage->isValid()) {
-            $fileName = $coverImage->getFilename() . '.' . $coverImage->getClientOriginalExtension();
+            $fileName = $coverImage->getFilename() . '-' . time() . '.' . $coverImage->getClientOriginalExtension();
             $storagePath = 'uploads/' . Auth::user()->storagePath() . '/' . $item->storagePath();
             $coverImage->move($storagePath, $fileName);
 
             $item->resources()->save(new Resource([
-                'name' => $fileName,
-                'path' => $storagePath,
-                'type' => 'public'
+                'alias' => $coverImage->getClientOriginalName(),
+                'name'  => $fileName,
+                'path'  => $storagePath,
+                'type'  => Resource::$PUBLIC
             ]));
         }
 
@@ -171,17 +165,22 @@ class ItemsController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
+     * @param Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $item = Item::find($id);
 
-        $deleted = $item && $item->user_id == Auth::user()->id && $item->delete();
+        $success = $item && $item->user_id == Auth::user()->id && $item->delete();
 
-        return \Response::json([
-            'success' => $deleted,
-            'message' => $deleted ? 'The item has been deleted.' : 'Unable to delete the item.'
-        ], $deleted ? 200 : 400);
+        if ($request->ajax()) {
+            return \Response::json([
+                'success' => $success,
+                'message' => $success ? 'The item has been deleted.' : 'Unable to delete the item.'
+            ], $success ? 200 : 400);
+        } else {
+            return redirect()->route('items::index');
+        }
     }
 }

@@ -29,6 +29,6 @@ class CreateStolenItemsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('StolenItems');
+        Schema::drop('Stolen_Items');
     }
 }

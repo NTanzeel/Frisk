@@ -51,6 +51,7 @@ var Maps = Maps || (function(){
         },
 
         addMarker: function(map, marker) {
+            console.log(marker);
             var options = {
                 position: marker,
                 map: map

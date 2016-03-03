@@ -18,10 +18,28 @@ $(document).ready(function() {
             },
 
             error : function(response) {
-                showNotification('danger', response.responseJSON.message);
+                if (response.responseJSON.message) {
+                    showNotification('danger', response.responseJSON.message);
+                } else {
+                    showNotification('danger', 'There was an error whilst processing your request, please try again.');
+                }
             }
         });
     });
+
+    //$('[data-toggle="modal"][data-ajax="true"]').each(function(key, element) {
+    //    element = $(element);
+    //    var parent = $(element.data('for'));
+    //    var modal = $($(element).data('target'));
+    //    console.log(modal);
+    //    modal.on('show.bs.modal', function() {
+    //        modal.find('.modal-body').load(element.data('source'), function() {
+    //            modal.find('modal-save').enable().on('click', function(event) {
+    //
+    //            });
+    //        });
+    //    });
+    //});
 
     function showNotification(type, message) {
         if (notification) {

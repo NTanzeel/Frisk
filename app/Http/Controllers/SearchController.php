@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resource;
 use DB;
 use App\Models\StolenItem;
 use Illuminate\Http\Request;
@@ -37,7 +38,13 @@ class SearchController extends Controller {
     }
 
 
-    public function near($latitude, $longitude) {
+    public function near(Request $request, $latitude, $longitude) {
+        $validOrdering = ['name', 'distance'];
+        $validSorting = ['ASC', 'DESC'];
+
+        $order = $request->has('order') && in_array($request->get('order'), $validOrdering) ? $request->get('order') : 'distance';
+        $sort = $request->has('sort') && in_array($request->get('sort'), $validSorting) ? $request->get('sort') : 'ASC';
+
         $results = StolenItem::select(DB::raw(
             'stolen_items.*, ROUND(
                 ACOS(
@@ -48,16 +55,16 @@ class SearchController extends Controller {
                     COS(' . $longitude . ' * PI() / 180 - longitude * PI() / 180)
                 ) * 6371,
             0) AS distance'
-        ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->with([
+        ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->join('items', 'stolen_items.location_id', '=', 'items.id')->with([
             'item',
             'location',
             'item.user',
             'item.resources' => function($builder) {
-                $builder->where('type', 'public');
+                $builder->where('type', Resource::$PUBLIC);
             }
-        ])->get();
+        ])->orderBy($order, $sort)->get();
 
-        return view('pages.near', compact('results'));
+        return view('pages.near', compact('results', 'order', 'sort'));
     }
 
 }

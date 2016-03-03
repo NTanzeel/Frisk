@@ -28,14 +28,13 @@
     <div class="page-content">
         <div class="tab-content">
             <div class="tab-pane active" id="all-Items">
-                @include('items.partials.listing', ['items' => $items, 'prefix' => 'item-'])
-                {!! $items->render() !!}
+                @include('items.partials.listing', ['items' => $items['all'], 'prefix' => 'item-'])
             </div>
             <div class="tab-pane" id="private-items">
-                @include('items.partials.listing', ['items' => $private, 'prefix' => 'private-item-'])
+                @include('items.partials.listing', ['items' => $items['private'], 'prefix' => 'private-item-'])
             </div>
             <div class="tab-pane" id="stolen-items">
-                @include('items.partials.listing', ['items' => $stolen, 'prefix' => 'stolen-item-'])
+                @include('items.partials.listing', ['items' => $items['reported'], 'prefix' => 'stolen-item-'])
             </div>
         </div>
     </div>

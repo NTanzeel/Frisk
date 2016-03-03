@@ -16,14 +16,14 @@
                         <div class="col-md-12">
                             <div class="dropdown pull-right">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="orderBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Order By
+                                    Order By ({{ ucfirst($order) . ' - ' . ($sort == 'ASC' ? 'Ascending' : 'Descending') }})
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="orderBy">
-                                    <li><a href="#">Name - Ascending</a></li>
-                                    <li><a href="#">Name - Descending</a></li>
-                                    <li><a href="#">Distance - Ascending</a></li>
-                                    <li><a href="#">Distance - Descending</a></li>
+                                    <li><a href="?order=name&sort=ASC">Name - Ascending</a></li>
+                                    <li><a href="?order=name&sort=DESC">Name - Descending</a></li>
+                                    <li><a href="?order=distance&sort=ASC">Distance - Ascending</a></li>
+                                    <li><a href="?order=distance&sort=DESC">Distance - Descending</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -39,28 +39,26 @@
                                     <div class="search-result">
                                         <div class="result-body">
                                             <div id="item-carousel-{{ $result->item->id }}" class="carousel slide" data-ride="carousel">
-                                                @foreach($result->item->resources as $key => $resource)
-                                                    <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-inner" role="listbox">
+                                                    @foreach($result->item->resources as $key => $resource)
                                                         <div class="item {{$key == 0 ? 'active' : ''}}">
-                                                            <a href="">
-                                                                <img src="{{ URL::asset($result->item->resources[0]->path . '/' . $result->item->resources[0]->name) }}" alt="Cover Image">
-                                                            </a>
+                                                            <a href="#" class="contained-image" style="background-image: url('{{ URL::asset($resource->path . '/' . $resource->name) }}');"></a>
                                                         </div>
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                </div>
                                                 @if (count($result->item->resources) > 1)
-                                                    <a class="left carousel-control" href="#" role="button" data-slide="prev">
+                                                    <a class="left carousel-control" href="#item-carousel-{{ $result->item->id }}" role="button" data-slide="prev">
                                                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                                         <span class="sr-only">Previous</span>
                                                     </a>
-                                                    <a class="right carousel-control" href="#" role="button" data-slide="next">
+                                                    <a class="right carousel-control" href="#item-carousel-{{ $result->item->id }}" role="button" data-slide="next">
                                                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                                         <span class="sr-only">Next</span>
                                                     </a>
                                                 @endif
                                             </div>
                                             <div class="distance">
-                                                {{ $result->distance }} <span class="unit small">KM</span>
+                                                {{ $result->distance > 0 ? $result->distance : '1' }} <span class="unit small">KM</span>
                                             </div>
                                         </div>
                                         <div class="result-footer">

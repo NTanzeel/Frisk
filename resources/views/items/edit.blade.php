@@ -4,6 +4,7 @@
 
 @section('style')
     @parent
+    <link href="{{ URL::asset('assets/css/dropzone/theme.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/themes/default/dashboard/items.css') }}" rel="stylesheet">
 @stop
 
@@ -18,6 +19,23 @@
         <li class="active"><a data-target="#edit" data-toggle="tab">Edit</a></li>
         <li><a data-target="#manage" data-toggle="tab">Manage</a></li>
         <li><a data-target="#report" data-toggle="tab">Report</a></li>
+        <li class="pull-right">
+            <div class="dropdown">
+                <a id="actionsMenu" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="actionsMenu">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#upload-resource-modal">
+                            Upload
+                        </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{{ route('items::remove', [$item->id]) }}">Delete</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
     <div class="page-content">
         <div class="tab-content">
@@ -35,44 +53,51 @@
                 ])
             </div>
             <div class="tab-pane" id="manage">
-                <div class="row">
-                    @foreach($item->resources as $resource)
-                        <div class="col-md-3">
-                            <div class="content-box item item-{{ $resource->id }}">
-                                <ul class="list-inline action-list top-right">
-                                    <li>
-                                        <a class="edit" href="{{ route('items::edit', [$resource->id]) }}">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="delete" data-for=".item-{{ $resource->id }}" data-target="{{ route('items::delete', [$resource->id]) }}" data-token="{{ csrf_token() }}">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="content-body">
-                                    <div class="item-image" style="background-image: url('{{ URL::asset($resource->path . '/' . $resource->name) }}')"></div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                @include('resources.index', ['groups' => $item->groupedResources()])
             </div>
             <div class="tab-pane" id="report">
-                {{ Form::open(['route' => ['items::toggle', $item->id], 'method' => 'post']) }}
-                    @if (!$item->stolenRecord)
-                        <div class="form-group">
-                            {!! Form::label('theft-location', 'Location') !!}
-                            {!! Form::select('location', $locations, 'Please Select', ['id' => 'theft-location', 'class' => 'form-control']) !!}
-                        </div>
-
-                        {!! Form::submit('Mark As Stolen', ['class' => 'btn btn-primary']) !!}
-                    @else
-                        {!! Form::submit('Mark As Recovered', ['class' => 'btn btn-primary btn-block']) !!}
-                    @endif
-                {{ Form::close() }}
+                @include('stolen.create', ['item' => $item, 'locations' => $locations])
             </div>
         </div>
     </div>
 @endsection
+
+@section('footer')
+    @parent
+    @include('utils.modal', [
+        'id' => 'ajax-modal', 'blank' => true
+    ])
+
+    @include('utils.modal', [
+        'id' => 'upload-resource-modal',
+        'blank' => false,
+        'title' => 'Upload Resources',
+        'content' => View::make('resources.create')->with('item', $item)->render(),
+        'buttons' => [
+            ['text' => 'Done', 'class' => 'info', 'dismiss' => true]
+        ]
+    ])
+@stop
+
+@section('scripts')
+    @parent
+    <script type="text/javascript" src="{{ URL::asset('assets/js/library/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/library/ajax-forms.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Dropzone.autoDiscover = false;
+
+            var form = $('#resources-dz');
+            var dz = new Dropzone("#resources-dz", { url: form.attr('action')});
+
+            dz.on('sending', function(file, xhr, formData) {
+                formData.append('_token', form.data('token'));
+                formData.append('item_id', form.data('item'));
+            });
+
+            dz.on('complete', function(response) {
+                console.log(response);
+            });
+        });
+    </script>
+@stop

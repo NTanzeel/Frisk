@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property mixed name
  * @property mixed id
  * @property mixed user_id
+ * @property mixed name
+ * @property mixed resources
  */
 class Item extends Model
 {
@@ -40,5 +41,11 @@ class Item extends Model
 
     public function stolenRecord() {
         return $this->hasOne('\App\Models\StolenItem');
+    }
+
+    public function groupedResources() {
+        return collect(['public' => [], 'private' => [], 'all' => $this->resources])->merge($this->resources->groupBy(function($resource) {
+            return $resource->type == Resource::$PUBLIC ? 'public' : 'private';
+        }));
     }
 }
