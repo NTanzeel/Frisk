@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resource;
+use App\Models\Item;
 use DB;
+use App\Models\Resource;
 use App\Models\StolenItem;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ use App\Http\Requests;
 
 class SearchController extends Controller {
 
-    public function query(Request $request) {
+    public function index(Request $request) {
         $query = StolenItem::with('item', 'location');
         if($request->has('latitude') && $request->has('longitude')) {
             $query = $query->select(DB::raw(
@@ -34,7 +35,7 @@ class SearchController extends Controller {
 
         $results = $query->get();
 
-        return view('pages.search', compact('results'));
+        return view('search.search', compact('results'));
     }
 
 
@@ -64,7 +65,18 @@ class SearchController extends Controller {
             }
         ])->orderBy($order, $sort)->get();
 
-        return view('pages.near', compact('results', 'order', 'sort'));
+        return view('search.near', compact('results', 'order', 'sort'));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id) {
+        $request = StolenItem::with('item', 'location')->where('id', $id)->get();
+
+        return $request;
+    }
 }

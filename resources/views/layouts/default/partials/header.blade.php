@@ -14,7 +14,7 @@
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-left search-form" action="{{ route('search::query') }}" method="get">
+            <form class="navbar-form navbar-left search-form" action="{{ route('search::index') }}" method="get">
                 <div class="form-group">
                     <input type="text" name="query" class="search-query" placeholder="Search" value="{{ \Request::get('query') != null ? \Request::get('query') : '' }}">
                 </div>

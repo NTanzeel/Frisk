@@ -1,0 +1,71 @@
+
+.search-results .search-result {
+    position: relative;
+}
+
+.search-results .search-result > .result-body {
+    position: relative;;
+}
+
+.search-results .search-result > .result-body > .carousel {
+    background: #FFFFFF;
+}
+
+.search-results .search-result > .result-body > .carousel .carousel-control {
+    color: #EEE;
+    background: none;
+}
+
+.search-results .search-result > .result-body > .carousel > .carousel-inner > .item > a.contained-image {
+    width: 100%;
+    height: 250px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.search-results .search-result > .result-body > .distance {
+    left: 0;
+    top: 30px;
+    color: #FFFFFF;
+    font-size: 24px;
+    padding: 7px 10px;
+    position: absolute;
+    background-color: #3c3f40;
+    background-color: rgba(60, 63, 64, 0.9);
+}
+
+.search-results .search-result > .result-body > .distance > .unit {
+    font-size: 16px;
+}
+
+.search-results .search-result > .result-footer {
+    padding: 10px;
+    position: relative;
+}
+
+.search-results .search-result > .result-footer a.name {
+    font-size: 16px;
+    display: block;
+}
+
+.search-results .search-result > .result-footer a.serial {
+    color: #AAA;
+    display: block;
+}
+
+.search-results .search-result > .result-footer > .user-initials {
+    top: -30px;
+    right: 10px;
+    width: 60px;
+    padding: 18px 0;
+    font-weight: bold;
+    text-align: center;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 2px solid #FFF;
+    background: #F5F5F5;
+    position: absolute;
+}

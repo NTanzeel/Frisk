@@ -33,13 +33,19 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['as' => 'search::'], function() {
         Route::get('search/', [
-            'as'    => 'query',
-            'uses'  => 'SearchController@search'
+            'as'    => 'index',
+            'uses'  => 'SearchController@index'
         ]);
 
-        Route::get('list/near/{latitude}/{longitude}', [
+        Route::get('search/near/{latitude}/{longitude}', [
             'as'    => 'near',
             'uses'  => 'SearchController@near'
+        ]);
+
+
+        Route::get('items/{id}', [
+            'as'    => 'view',
+            'uses'  => 'SearchController@show'
         ]);
     });
 

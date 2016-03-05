@@ -1,4 +1,3 @@
-{{--{{ dd(get_defined_vars()['__data']) }}--}}
 <div class="modal fade" {!! isset($id) ? 'id="' . $id . '"' : '' !!} tabindex="-1" role="dialog" aria-labelledby="modal-title">
     @if (!$blank)
         <div class="modal-dialog" role="document">

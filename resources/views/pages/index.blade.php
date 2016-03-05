@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <form id="search_form" class="search-form" action="{{ route('search::query') }}" method="get">
+                        <form id="search_form" class="search-form" action="{{ route('search::index') }}" method="get">
                             <label for="search_query" class="sr-only">Search</label>
                             <div class="input-group">
                                 <input type="text" id="search_query" name="query" class="form-control" placeholder="Enter a name or serial number" />
