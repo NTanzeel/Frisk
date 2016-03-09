@@ -29,7 +29,7 @@
                     <li><a href="{{ route('auth::register') }}">Register</a></li>
                 @else
                     <li><a class="search-near-me" href="{{ route('search::near', [':latitude', ':longitude']) }}"><i class="fa fa-map-marker nav-icon"></i> Around Me</a></li>
-                    <li><a href="{{ route('dashboard::index') }}"><i class="fa fa-comments nav-icon"></i> Messages</a></li>
+                    <li><a href="{{ route('messages::index') }}"><i class="fa fa-comments nav-icon"></i> Messages</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-user nav-icon"></i> {{ Auth::user()->name }} <span class="caret"></span>

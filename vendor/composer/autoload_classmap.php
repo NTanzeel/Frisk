@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreateBlockedUsersTable' => $baseDir . '/database/migrations/2016_03_04_165137_create_blocked_users_table.php',
-    'CreateConversationsTable' => $baseDir . '/database/migrations/2016_03_04_164514_create_conversations_table.php',
+    'CreateDeletedMessagesTable' => $baseDir . '/database/migrations/2016_03_05_234655_create_deleted_messages_table.php',
     'CreateItemsTable' => $baseDir . '/database/migrations/2015_12_31_153610_create_items_table.php',
     'CreateLocationsTable' => $baseDir . '/database/migrations/2015_12_30_235733_create_locations_table.php',
     'CreateMessagesTable' => $baseDir . '/database/migrations/2016_03_04_163902_create_messages_table.php',

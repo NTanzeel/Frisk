@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StolenItem extends Model {
+
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,5 +28,9 @@ class StolenItem extends Model {
 
     public function location() {
         return $this->belongsTo('\App\Models\Location');
+    }
+
+    public function messages() {
+        return $this->hasMany('\App\Models\Message');
     }
 }

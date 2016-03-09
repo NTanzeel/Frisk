@@ -1,0 +1,77 @@
+.messages {
+    padding: 0 15px;
+}
+
+.messages .message {
+    cursor: pointer;
+    background: #FAFAFA;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.messages .message.unread,
+.messages .message.unread > .subject > label{
+    font-weight: bold;
+    background: #F5F5F5;
+}
+
+.messages .message > .subject,
+.messages .message > .name,
+.messages .message > .date {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.messages .message > .actions > .action {
+    width: 18px;
+    height: 18px;
+    float: right;
+    display: block;
+    line-height: 18px;
+    text-align: center;
+    padding: 12px 10px 13px;
+    box-sizing: content-box;
+}
+
+.view-message .message-header {
+    margin-bottom: 10px;
+}
+
+.view-message .message-header > .subject,
+.view-message .message-header > .sender,
+.view-message .message-header > .recipient {
+    padding: 10px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.view-message .message-header > .recipient{
+    padding-top: 0;
+}
+
+.view-message .message-header label {
+    float: left;
+    width: 70px;
+    display: block;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.view-message .message-body {
+    padding: 10px;
+}
+
+.view-message textarea {
+    resize: vertical;
+}
+
+.user-initials {
+    width: 60px;
+    padding: 18px 0;
+    font-weight: bold;
+    text-align: center;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 2px solid #FFF;
+    background: #F5F5F5;
+    position: absolute;
+}

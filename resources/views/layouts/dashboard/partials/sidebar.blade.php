@@ -24,7 +24,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ '#' }}">
+            <a href="{{ route('messages::index') }}">
                 <span class="glyphicon glyphicon-comment nav-icon"></span>
                 <span class="nav-label">Message</span>
             </a>
@@ -35,5 +35,12 @@
                 <span class="nav-label">Account</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('auth::logout') }}">
+                <span class="glyphicon glyphicon-log-out nav-icon"></span>
+                <span class="nav-label">Logout</span>
+            </a>
+        </li>
+
     </ul>
 </div>

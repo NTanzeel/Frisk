@@ -229,4 +229,41 @@ Route::group(['middleware' => 'web'], function () {
             'uses'  => 'ResourcesController@destroy'
         ]);
     });
+
+    Route::group(['as' => 'messages::'], function() {
+        Route::get('dashboard/messages', [
+            'as'    => 'index',
+            'uses'  => 'MessagesController@index'
+        ]);
+
+        Route::get('dashboard/messages/{id}', [
+            'as'    => 'view',
+            'uses'  => 'MessagesController@show'
+        ]);
+
+        Route::get('dashboard/messages/{id}/create', [
+            'as'    => 'create',
+            'uses'  => 'MessagesController@create'
+        ]);
+
+        Route::get('dashboard/messages/{id}/reply', [
+            'as'    => 'reply',
+            'uses'  => 'MessagesController@reply'
+        ]);
+
+        Route::post('dashboard/messages/{id}/create', [
+            'as'    => 'store',
+            'uses'  => 'MessagesController@store'
+        ]);
+
+        Route::post('dashboard/messages/{id}/reply', [
+            'as'    => 'update',
+            'uses'  => 'MessagesController@reply'
+        ]);
+
+        Route::delete('dashboard/messages/{id}', [
+            'as'    => 'delete',
+            'uses'  => 'MessagesController@destroy'
+        ]);
+    });
 });
