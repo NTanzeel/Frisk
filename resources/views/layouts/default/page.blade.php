@@ -22,4 +22,5 @@
 @section('scripts')
     @parent
     <script type="text/javascript" src="{{ URL::asset('assets/js/page/common.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('assets/js/library/maps.js') }}"></script>
 @stop

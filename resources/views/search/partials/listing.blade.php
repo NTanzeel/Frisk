@@ -1,6 +1,6 @@
 @foreach($results as $result)
     <div class="col-md-{{ 12 / $ipr }}">
-        <div class="search-result">
+        <div id="reported-item-{{ $result->id }}" class="search-result">
             <div class="result-body">
                 <div id="item-carousel-{{ $result->item->id }}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">

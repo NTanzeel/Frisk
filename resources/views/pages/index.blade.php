@@ -38,7 +38,6 @@
 
 @section('scripts')
     @parent
-    <script type="text/javascript" src="{{ URL::asset('assets/js/library/maps.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             Maps.init({

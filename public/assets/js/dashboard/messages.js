@@ -7,8 +7,4 @@ $(document).ready(function() {
             window.location.href = $(this).attr('href');
         }
     });
-
-    //messages.on('click', '.no-redirect', function(event) {
-    //    event.stopPropagation();
-    //});
 });

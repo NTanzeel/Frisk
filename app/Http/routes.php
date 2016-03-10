@@ -246,14 +246,14 @@ Route::group(['middleware' => 'web'], function () {
             'uses'  => 'MessagesController@create'
         ]);
 
-        Route::get('dashboard/messages/{id}/reply', [
-            'as'    => 'reply',
-            'uses'  => 'MessagesController@reply'
-        ]);
-
         Route::post('dashboard/messages/{id}/create', [
             'as'    => 'store',
             'uses'  => 'MessagesController@store'
+        ]);
+
+        Route::get('dashboard/messages/{id}/reply', [
+            'as'    => 'reply',
+            'uses'  => 'MessagesController@reply'
         ]);
 
         Route::post('dashboard/messages/{id}/reply', [

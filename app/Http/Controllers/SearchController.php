@@ -56,16 +56,22 @@ class SearchController extends Controller {
                     COS(' . $longitude . ' * PI() / 180 - longitude * PI() / 180)
                 ) * 6371,
             0) AS distance'
-        ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->join('items', 'stolen_items.location_id', '=', 'items.id')->with([
+        ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->join('items', 'stolen_items.item_id', '=', 'items.id')->with([
             'item',
             'location',
             'item.user',
             'item.resources' => function($builder) {
                 $builder->where('type', Resource::$PUBLIC);
             }
-        ])->orderBy($order, $sort)->get();
+        ])->having('distance', '<=', 20)->orderBy($order, $sort)->get();
 
-        return view('search.near', compact('results', 'order', 'sort'));
+        $markers = [];
+
+        foreach($results as $result) {
+            $markers[] = ['lat' => $result->location->latitude, 'lng' => $result->location->longitude];
+        }
+
+        return view('search.near', compact('results', 'markers', 'order', 'sort', 'latitude', 'longitude'));
     }
 
     /**
@@ -75,7 +81,7 @@ class SearchController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $request = StolenItem::with('item', 'location')->where('id', $id)->get();
+        $request = StolenItem::with('item', 'location', 'item.user', 'item.resources')->where('id', $id)->first();
 
         return $request;
     }

@@ -11,7 +11,7 @@ var Frisk = Frisk || (function(){
         },
 
         get : function(key) {
-            return _args[key] ? _args[key] : false;
+            return key in _args ? _args[key] : false;
         }
     };
 }());

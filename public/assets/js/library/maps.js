@@ -1,7 +1,6 @@
 var Maps = Maps || (function(){
     var _args = {};
     var _maps = {};
-
     return {
         init : function(args) {
             _args = args;
@@ -25,7 +24,7 @@ var Maps = Maps || (function(){
         },
 
         create: function(id, element) {
-            return _maps[id] = new google.maps.Map(element, {
+            return this.createRaw(id, element, {
                 center: {lat: $(element).data('latitude'), lng: $(element).data('longitude')},
                 zoom: 14,
                 disableDefaultUI: true,
@@ -40,18 +39,31 @@ var Maps = Maps || (function(){
             });
         },
 
+        createRaw: function(id, element, options) {
+            return _maps[id] = new google.maps.Map(element, options);
+        },
+
         get : function(id) {
             return _maps[key];
         },
 
         addMarkers: function(map, markers) {
-            $.each(markers, function(marker) {
-                this.addMarker(map, marker);
+            var that = this;
+            $.each(markers, function(key, marker) {
+                var options = {
+                    position: marker,
+                    map: map
+                };
+
+                if (_args.map_marker) {
+                    options['icon'] = _args.map_marker;
+                }
+
+                new google.maps.Marker(options);
             })
         },
 
         addMarker: function(map, marker) {
-            console.log(marker);
             var options = {
                 position: marker,
                 map: map
@@ -65,6 +77,3 @@ var Maps = Maps || (function(){
         }
     };
 }());
-
-$(document).ready(function() {
-});

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property Item   item
  * @property mixed  item_id
+ * @property mixed path
+ * @property mixed name
  */
 class Resource extends Model {
     use SoftDeletes;
@@ -26,5 +28,9 @@ class Resource extends Model {
 
     public function item() {
         return $this->belongsTo('\App\Models\Item');
+    }
+
+    public function getPathAttribute($path) {
+        return asset($path);
     }
 }
