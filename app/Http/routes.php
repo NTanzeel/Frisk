@@ -258,7 +258,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('dashboard/messages/{id}/reply', [
             'as'    => 'update',
-            'uses'  => 'MessagesController@reply'
+            'uses'  => 'MessagesController@update'
         ]);
 
         Route::delete('dashboard/messages/{id}', [

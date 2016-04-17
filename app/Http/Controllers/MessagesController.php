@@ -72,7 +72,7 @@ class MessagesController extends Controller {
         $sender = Auth::user();
         $recipient = $message->sender;
 
-        return view('messages.create', compact('item', 'sender', 'recipient'));
+        return view('messages.reply', compact('message', 'item', 'sender', 'recipient'));
     }
 
     /**
@@ -126,7 +126,20 @@ class MessagesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(CreateMessageRequest $request, $id) {
+        $message = Message::findOrFail($id);
 
+        if ($message->sender_id == Auth::user()->id)
+            return redirect()->route('messages::index');
+
+        $newMessage = new Message([
+            'sender_id'     => Auth::user()->id,
+            'recipient_id'  => $message->sender_id,
+            'content'       => $request->get('content')
+        ]);
+
+        $message->regarding->messages()->save($newMessage);
+
+        return redirect()->route('messages::view', [$newMessage->id]);
     }
 
     /**

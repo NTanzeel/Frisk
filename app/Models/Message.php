@@ -26,15 +26,15 @@ class Message extends Model {
     ];
 
     public function sender() {
-        return $this->belongsTo('\App\Models\User', 'sender_id');
+        return $this->belongsTo('\App\Models\User', 'sender_id')->withTrashed();
     }
 
     public function recipient() {
-        return $this->belongsTo('\App\Models\User', 'recipient_id');
+        return $this->belongsTo('\App\Models\User', 'recipient_id')->withTrashed();
     }
 
     public function regarding() {
-        return $this->belongsTo('\App\Models\StolenItem', 'stolen_item_id');
+        return $this->belongsTo('\App\Models\StolenItem', 'stolen_item_id')->withTrashed();
     }
 
     public function deletionRecord() {

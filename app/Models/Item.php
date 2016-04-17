@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed name
  * @property mixed resources
  */
-class Item extends Model
-{
+class Item extends Model {
+
     use SoftDeletes;
 
     protected $fillable = [
@@ -22,6 +22,15 @@ class Item extends Model
     protected $dates = [
         'deleted_at'
     ];
+
+    protected static function boot() {
+        parent::boot();
+
+        self::deleted(function(Item $item) {
+            $item->resources()->delete();
+            $item->stolenRecord()->delete();
+        });
+    }
 
     public function storagePath() {
         return md5($this->id . $this->name);
@@ -44,7 +53,7 @@ class Item extends Model
     }
 
     public function groupedResources() {
-        return collect(['public' => [], 'private' => [], 'all' => $this->resources])->merge($this->resources->groupBy(function($resource) {
+        return collect(['public' => [], 'private' => [], 'all' => $this->resources])->merge($this->resources->groupBy(function ($resource) {
             return $resource->type == Resource::$PUBLIC ? 'public' : 'private';
         }));
     }

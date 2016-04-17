@@ -71,18 +71,31 @@ a:hover {
 .navbar .search-form {
     margin: 0;
     padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 767px) {
+    .navbar .search-form {
+        border-top: none;
+    }
 }
 
 .navbar .search-form input[type=text] {
     border: 0;
     outline: 0;
+    width: 100%;
     height: auto;
-    width: 357px;
-    border-left: 1px solid #E7E7E7;
     padding: 20px 0 20px 48px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAOVBMVEUAAADN0MzBwcHMzsrN0MvLy8vM0Muurq7M0MzLzsvMz8zNz8vN0MzN0MvMz8vM0MzMz8rNz8vN0MxKa1gpAAAAEnRSTlMA8QxHqhjqBJUhZ7XR5cSAUYexMXffAAABIUlEQVR4XsWV0bKDIAxEEaQkKKj8%2F8feEu%2BUToPFfeq%2BFXqyG4VomoKjnEpJmVwwY3kqbyI%2FAMJWPrR9dfFrUVq%2FmPAkRSdybC07%2Bv%2FJl%2FUn2Y%2BvECGeKxceQfIs9n3NLpKq34f0S5%2BrJJ13A0l9vS4evVBU01oN2EmMlUI1iD3rWHd0F64adJsL1cLpRMp4sJVbmZ55VkB6AtwH%2BAkkBdTObB%2BwdQ8G4Ehw0%2FBjhV8cfDTQwwcfb%2FACzdvOyBUVkb03BJoS3xszTQ8eDLKm9VgbMRiV8zlmwqyJ%2FjCuFQ5jFHE57ndxUMS1WHIhBKGETSjBj18QHiVmgxIOIbJ8YgBil6sJEFFu5l0i77HNlzHxkjcYsZt78jPyf5E7Foo1zx89RiefHSpQDgAAAABJRU5ErkJggg%3D%3D) 12px 50% no-repeat;
     background-size: 24px 24px;
+}
+
+@media (min-width: 768px) {
+    .navbar .search-form input[type=text] {
+        width: 235px;
+        border-left: 1px solid #E7E7E7;
+    }
 }

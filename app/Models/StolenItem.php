@@ -23,11 +23,11 @@ class StolenItem extends Model {
     ];
 
     public function item() {
-        return $this->belongsTo('\App\Models\Item');
+        return $this->belongsTo('\App\Models\Item')->withTrashed();
     }
 
     public function location() {
-        return $this->belongsTo('\App\Models\Location');
+        return $this->belongsTo('\App\Models\Location')->withTrashed();
     }
 
     public function messages() {

@@ -15,7 +15,7 @@
 
 @section('content')
     <div class="page-content">
-        {{ Form::open(['route' => ['messages::store', $item-> id]]) }}
+        {{ Form::open(['route' => ['messages::store', $item->id]]) }}
             <div class="view-message">
                 <div class="message-header">
                     <div class="recipient">

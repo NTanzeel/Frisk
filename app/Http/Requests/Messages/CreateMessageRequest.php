@@ -22,7 +22,7 @@ class CreateMessageRequest extends Request {
      */
     public function rules() {
         return [
-            'content'   => 'required|string|min:50|max:1000'
+            'content'   => 'required|string|min:10|max:1000'
         ];
     }
 }

@@ -32,5 +32,12 @@
 
 @section('scripts')
     @parent
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Frisk.init({
+                messageRoute: '{{ route('messages::create', [':id']) }}'
+            });
+        })
+    </script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/page/search.js') }}"></script>
 @stop

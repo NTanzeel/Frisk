@@ -21,9 +21,11 @@
                         </a>
                     @endif
                 </div>
-                <div class="distance">
-                    {{ $result->distance > 0 ? $result->distance : '1' }} <span class="unit small">KM</span>
-                </div>
+                @if (isset($result->distance))
+                    <div class="distance">
+                        {{ $result->distance > 0 ? $result->distance : '1' }} <span class="unit small">KM</span>
+                    </div>
+                @endif
             </div>
             <div class="result-footer">
                 <a class="name show-item" href="{{ route('search::view', [$result->id]) }}">

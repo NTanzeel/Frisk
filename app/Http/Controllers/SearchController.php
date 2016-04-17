@@ -13,7 +13,11 @@ use App\Http\Requests;
 class SearchController extends Controller {
 
     public function index(Request $request) {
-        $query = StolenItem::with('item', 'location');
+        $query = StolenItem::with('item', 'location')->whereHas('item', function ($builder) use ($request) {
+            $builder->where('name', 'LIKE', '%' . $request->get('query') . '%');
+            $builder->orWhere('identifier', 'LIKE', '%' . $request->get('query') . '%');
+        });
+
         if($request->has('latitude') && $request->has('longitude')) {
             $query = $query->select(DB::raw(
                 'stolen_items.*, ROUND(
@@ -25,14 +29,11 @@ class SearchController extends Controller {
                         COS(' . $request->get('longitude') . ' * PI() / 180 - longitude * PI() / 180)
                     ) * 6371,
                 0) AS distance'
-            ))->join('locations', 'stolen_items.location_id', '=', 'locations.id');
+            ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->orderBy('distance', 'ASC');
         }
 
-        $query->whereHas('item', function ($builder) use ($request) {
-            $builder->where('name', 'LIKE', '%' . $request->get('query') . '%');
-            $builder->orWhere('identifier', 'LIKE', '%' . $request->get('query') . '%');
-        });
 
+//        dd($query->toSql());
         $results = $query->get();
 
         return view('search.search', compact('results'));
