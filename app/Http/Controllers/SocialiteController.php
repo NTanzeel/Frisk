@@ -61,7 +61,11 @@ class SocialiteController extends Controller {
         ]);
 
         if (!$oauth->exists) {
-            $dbUser = User::firstOrCreate(['name' => $user->getName(), 'email' => $user->getEmail()]);
+            $dbUser = User::where('email', $user->getEmail())->first();
+            if (!$dbUser) {
+                $dbUser = User::create(['name' => $user->getName(), 'email' => $user->getEmail()]);
+            }
+
             $dbUser->oAuth()->save($oauth);
         } else {
             $dbUser = $oauth->user;
@@ -69,6 +73,6 @@ class SocialiteController extends Controller {
 
         $this->auth->login($dbUser, true);
 
-        return redirect('/home');
+        return redirect('/');
     }
 }

@@ -117,7 +117,7 @@ Route::group(['middleware' => 'web'], function () {
         ]);
 
         Route::get('auth/{provider}/callback', [
-            'as'    => 'redirect',
+            'as'    => 'callback',
             'uses'  =>'SocialiteController@callback'
         ]);
     });

@@ -32,8 +32,6 @@ class SearchController extends Controller {
             ))->join('locations', 'stolen_items.location_id', '=', 'locations.id')->orderBy('distance', 'ASC');
         }
 
-
-//        dd($query->toSql());
         $results = $query->get();
 
         return view('search.search', compact('results'));
