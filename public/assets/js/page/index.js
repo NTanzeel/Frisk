@@ -46,8 +46,8 @@ $(document).ready(function() {
     $('#near_me').on('click', function() {
         if (!Frisk.get('resolved')) {
             Maps.getLocation(function (location) {
-                Frisk.store('resolved', true);
                 Frisk.store('route', Frisk.get('route').replace(':latitude', location.lat).replace(':longitude', location.lng));
+                Frisk.store('resolved', true);
             }, function (message) {});
         }
 
