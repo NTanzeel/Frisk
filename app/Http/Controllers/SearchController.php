@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use DB;
 use App\Models\Resource;
 use App\Models\StolenItem;
@@ -14,8 +13,10 @@ class SearchController extends Controller {
 
     public function index(Request $request) {
         $query = StolenItem::with('item', 'location')->whereHas('item', function ($builder) use ($request) {
-            $builder->where('name', 'LIKE', '%' . $request->get('query') . '%');
-            $builder->orWhere('identifier', 'LIKE', '%' . $request->get('query') . '%');
+            $builder->whereNested(function($builder) use($request) {
+                $builder->where('name', 'LIKE', '%' . $request->get('query') . '%');
+                $builder->orWhere('identifier', 'LIKE', '%' . $request->get('query') . '%');
+            });
         });
 
         if($request->has('latitude') && $request->has('longitude')) {
