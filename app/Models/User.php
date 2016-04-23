@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-/**
- * @property mixed id
- * @property mixed email
- */
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use SoftDeletes;
 
     /**
