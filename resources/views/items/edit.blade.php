@@ -17,7 +17,7 @@
 @section('content')
     <ul class="nav nav-tabs">
         <li class="active"><a data-target="#edit" data-toggle="tab">Edit</a></li>
-        <li><a data-target="#manage" data-toggle="tab">Manage</a></li>
+        <li><a data-target="#manage" data-toggle="tab">Resources</a></li>
         <li><a data-target="#report" data-toggle="tab">Report</a></li>
         <li class="pull-right">
             <div class="dropdown">

@@ -21,13 +21,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="actionsMenu">
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#upload-resource-modal">
-                            Mark as Read/Unread
-                        </a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="">Delete</a>
+                        <a class="no-redirect" href="#" id="delete-selected">Delete</a>
                     </li>
                 </ul>
             </div>

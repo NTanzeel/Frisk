@@ -28,4 +28,8 @@ class Location extends Model
     public function items() {
         return $this->hasMany('\App\Models\Item');
     }
+
+    public function stolenRecords() {
+        return $this->hasMany('\App\Models\StolenItem');
+    }
 }

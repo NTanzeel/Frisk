@@ -13,18 +13,18 @@ class SearchController extends Controller {
 
     public function index(Request $request) {
         $query = StolenItem::with('item', 'location')->whereHas('item', function ($builder) use ($request) {
-            $builder->whereNested(function($builder) use($request) {
+            $builder->whereNested(function ($builder) use ($request) {
                 $builder->where('name', 'LIKE', '%' . $request->get('query') . '%');
                 $builder->orWhere('identifier', 'LIKE', '%' . $request->get('query') . '%');
             });
         });
 
-        if($request->has('latitude') && $request->has('longitude')) {
+        if ($request->has('latitude') && $request->has('longitude')) {
             $query = $query->select(DB::raw(
                 'stolen_items.*, ROUND(
                     ACOS(
                         SIN(latitude * PI() / 180) *
-                        SIN('. $request->get('latitude') .' * PI() / 180) +
+                        SIN(' . $request->get('latitude') . ' * PI() / 180) +
                         COS(latitude * PI() / 180) *
                         COS(' . $request->get('latitude') . ' * PI() / 180) *
                         COS(' . $request->get('longitude') . ' * PI() / 180 - longitude * PI() / 180)
@@ -50,7 +50,7 @@ class SearchController extends Controller {
             'stolen_items.*, ROUND(
                 ACOS(
                     SIN(latitude * PI() / 180) *
-                    SIN('. $latitude .' * PI() / 180) +
+                    SIN(' . $latitude . ' * PI() / 180) +
                     COS(latitude * PI() / 180) *
                     COS(' . $latitude . ' * PI() / 180) *
                     COS(' . $longitude . ' * PI() / 180 - longitude * PI() / 180)
@@ -60,14 +60,14 @@ class SearchController extends Controller {
             'item',
             'location',
             'item.user',
-            'item.resources' => function($builder) {
+            'item.resources' => function ($builder) {
                 $builder->where('type', Resource::$PUBLIC);
             }
         ])->having('distance', '<=', 20)->orderBy($order, $sort)->get();
 
         $markers = [];
 
-        foreach($results as $result) {
+        foreach ($results as $result) {
             $markers[] = ['lat' => $result->location->latitude, 'lng' => $result->location->longitude];
         }
 

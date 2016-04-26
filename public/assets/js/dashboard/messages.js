@@ -7,4 +7,12 @@ $(document).ready(function() {
             window.location.href = $(this).attr('href');
         }
     });
+
+    $('#delete-selected').on('click', function(event) {
+        event.preventDefault();
+        $.each($('.select-message:checked'), function(id, checkbox) {
+            console.log($(checkbox).parents('.message'));
+            $(checkbox).parents('.message').find('.delete').trigger('click');
+        });
+    });
 });

@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </section>
-            <section class="map-view hidden-sm hidden-xs">
+            <section class="map-view hidden-xs">
                 <div id="near_me_map" class="map" data-latitude="{{ $latitude }}" data-longitude="{{ $longitude }}"></div>
             </section>
         </div>
@@ -69,17 +69,18 @@
 @section('scripts')
     @parent
     <script type="text/javascript" src="{{ URL::asset('assets/js/library/maps.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
             Frisk.init({
                 messageRoute: '{{ route('messages::create', [':id']) }}',
                 {!! 'markers : ' . json_encode($markers) !!}
             });
-
             Maps.init({
                 map_marker : '{{ URL::asset('assets/img/icons/map_marker.png') }}'
             });
         })
     </script>
+
     <script type="text/javascript" src="{{ URL::asset('assets/js/page/search.js') }}"></script>
 @stop

@@ -27,20 +27,6 @@ $(document).ready(function() {
         });
     });
 
-    //$('[data-toggle="modal"][data-ajax="true"]').each(function(key, element) {
-    //    element = $(element);
-    //    var parent = $(element.data('for'));
-    //    var modal = $($(element).data('target'));
-    //    console.log(modal);
-    //    modal.on('show.bs.modal', function() {
-    //        modal.find('.modal-body').load(element.data('source'), function() {
-    //            modal.find('modal-save').enable().on('click', function(event) {
-    //
-    //            });
-    //        });
-    //    });
-    //});
-
     function showNotification(type, message) {
         if (notification) {
             notification.find('.alert').text(message).removeClass(function (index, css) {

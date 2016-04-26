@@ -4,7 +4,7 @@
             <div  id="message-{{ $message->id }}" class="row message {{ $type == 'received' ? ($message->seen_at ? 'read' : 'unread') : 'read' }}" href="{{ route('messages::view', [$message->id]) }}">
                 <div class="col-md-{{ $type == 'received' ? '6' : '7' }} subject">
                     <label class="checkbox-inline no-redirect">
-                        <input type="checkbox" id="select_{{ $message->id }}" value="{{ $message->id }}"> Re: {{ $message->regarding->item->name }}
+                        <input type="checkbox" id="select_{{ $message->id }}" class="select-message" value="{{ $message->id }}"> Re: {{ $message->regarding->item->name }}
                     </label>
                 </div>
                 <div class="col-md-2 name hidden-sm hidden-xs">

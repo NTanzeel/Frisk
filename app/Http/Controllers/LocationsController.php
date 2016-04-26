@@ -90,7 +90,7 @@ class LocationsController extends Controller {
     public function destroy($id) {
         $location = Location::find($id);
 
-        $deleted = $location->items()->count() == 0 && $location->delete();
+        $deleted = $location->items()->count() == 0 && $location->stolenRecords()->count() == 0 && $location->delete();
 
         return \Response::json([
             'success' => $deleted,

@@ -64,10 +64,10 @@ class MessagesController extends Controller {
     public function reply($id) {
         $message = Message::findOrFail($id);
 
-        if ($message->sender_id == Auth::user()->id)
-            return redirect()->route('messages::index');
-
         $item = $message->regarding;
+
+        if ($message->sender_id == Auth::user()->id || $item->trashed())
+            return redirect()->route('messages::index');
 
         $sender = Auth::user();
         $recipient = $message->sender;
@@ -152,7 +152,7 @@ class MessagesController extends Controller {
     public function destroy(Request $request, $id) {
         $message = Message::find($id);
 
-        $success = $message && $message->sender_id == Auth::user()->id || $message->recipient_id == Auth::user()->id;
+        $success = $message && ($message->sender_id == Auth::user()->id || $message->recipient_id == Auth::user()->id);
 
         $record = new DeletedMessage([
             'deleted_by'    => Auth::user()->id

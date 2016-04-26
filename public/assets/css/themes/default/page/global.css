@@ -31,11 +31,13 @@ a:hover {
     line-height: 20px;
 }
 
-.nav .open > a,
-.nav .open > a:focus,
-.nav .open > a:hover,
-.navbar-nav > li > a {
-    border-left: 1px solid #E7E7E7;
+@media (min-width: 768px) {
+    .nav .open > a,
+    .nav .open > a:focus,
+    .nav .open > a:hover,
+    .navbar-nav > li > a {
+        border-left: 1px solid #E7E7E7;
+    }
 }
 
 .navbar-nav > li > a .nav-icon {
@@ -61,10 +63,19 @@ a:hover {
     background-color: #F5F5F5;
 }
 
+.navbar-fixed-top .navbar-collapse,
+.navbar-fixed-bottom .navbar-collapse {
+    max-height: none;
+}
+
+.dropdown-menu > li > a,
+.navbar-nav .open .dropdown-menu > li > a {
+    padding: 8px 20px;
+}
+
 @media(min-width: 768px) {
     .dropdown-menu > li > a {
         width: 200px;
-        padding: 8px 20px;
     }
 }
 
